@@ -59,13 +59,13 @@
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
             <ListView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/favoriteContactListView" />
         </LinearLayout>
-
         <RelativeLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
@@ -82,15 +82,16 @@
                 android:text="연락처" />
 
         </RelativeLayout>
-
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent"
+            android:layout_weight="1">
             <ListView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:id="@+id/contactsListView" />
         </LinearLayout>
+
     </LinearLayout>
 </FrameLayout>

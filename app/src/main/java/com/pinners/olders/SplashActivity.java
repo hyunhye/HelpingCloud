@@ -27,30 +27,14 @@ public class SplashActivity extends AppCompatActivity {
         setContentView(R.layout.activity_splash);
 
 
-        final int[] imageArray = { R.drawable.loading1,
-                R.drawable.loading2,
-                R.drawable.loading3,
-                R.drawable.loading1,
-                R.drawable.loading2,
-        };
+        Handler hd = new Handler();
+        hd.postDelayed(new Runnable() {
 
-        loadingIv = (ImageView)findViewById(R.id.loadingIv);
-        final Handler handler = new Handler();
-
-        Runnable runnable = new Runnable() {
-            int i = 0;
+            @Override
             public void run() {
-                loadingIv.setImageResource(imageArray[i]);
-                i++;
-                if(i == (imageArray.length-1))
-                {
-                    finish();
-                    i--;
-                }
-                handler.postDelayed(this, 500);
+                finish();       // 3 초후 이미지를 닫아버림
             }
-        };
-        handler.postDelayed(runnable, 500);
+        }, 3000);
     }
 
     @Override

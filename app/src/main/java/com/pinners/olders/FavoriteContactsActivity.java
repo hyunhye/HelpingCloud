@@ -1,19 +1,13 @@
 package com.pinners.olders;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
-import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
-import android.widget.Button;
+import android.widget.GridView;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,14 +16,19 @@ import java.util.List;
  * Created by Administrator on 2016-06-22.
  */
 public class FavoriteContactsActivity extends AppCompatActivity {
-    private ListView contactListView;
+    private GridView contactGridView;
     ArrayList list;
-    ListViewAdapter2 adapter;
+    GridViewAdapter adapter;
     DBHelper db;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_favorite_contacts);
+
+        android.support.v7.app.ActionBar actionBar = getSupportActionBar();
+        actionBar.setBackgroundDrawable(getResources().getDrawable(R.drawable.favorite_actionbar));
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setTitle("즐겨찾기");
 
         init();
 
@@ -39,8 +38,8 @@ public class FavoriteContactsActivity extends AppCompatActivity {
                 adapter.addItem(contact.getName(), contact.getPhoneNumber(), contact.getFavorite());
             }
         }
-        contactListView.setAdapter(adapter);
-        contactListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        contactGridView.setAdapter(adapter);
+        contactGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Contact item = (Contact) parent.getItemAtPosition(position) ;
@@ -55,9 +54,19 @@ public class FavoriteContactsActivity extends AppCompatActivity {
     }
 
     private void init(){
-        contactListView = (ListView) findViewById(R.id.contactListView);
+        contactGridView = (GridView) findViewById(R.id.contactGridView);
         list = new ArrayList();
-        adapter = new ListViewAdapter2();
+        adapter = new GridViewAdapter();
         db = new DBHelper(this);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

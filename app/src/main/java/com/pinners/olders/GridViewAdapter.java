@@ -8,11 +8,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class ListViewAdapter2 extends BaseAdapter {
+public class GridViewAdapter extends BaseAdapter {
     private ArrayList<Contact> listViewItemList = new ArrayList<Contact>();
 
     @Override
@@ -27,16 +28,21 @@ public class ListViewAdapter2 extends BaseAdapter {
 
         if (convertView == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = inflater.inflate(R.layout.activity_list_item2, parent, false);
+            convertView = inflater.inflate(R.layout.activity_grid_item, parent, false);
         }
 
-        TextView listItemNameTv = (TextView)convertView.findViewById(R.id.listItemNameTv2);
-        TextView listItemPhoneNumberTv = (TextView)convertView.findViewById(R.id.listItemPhoneNumberTv2);
+        TextView gridNameTv = (TextView)convertView.findViewById(R.id.gridNameTv);
+        TextView gridPhoneNumberTv = (TextView)convertView.findViewById(R.id.gridPhoneNumberTv);
+        ImageView gridPhotoIv = (ImageView)convertView.findViewById(R.id.gridPhotoIv);
 
         Contact listViewItem = listViewItemList.get(position);
 
-        listItemNameTv.setText(listViewItem.getName());
-        listItemPhoneNumberTv.setText(listViewItem.getPhoneNumber());
+        int random = (int) (Math.random() * 3) + 1;
+        if(random == 1) gridPhotoIv.setImageResource(R.drawable.f1);
+        else if(random == 2) gridPhotoIv.setImageResource(R.drawable.f2);
+        else  gridPhotoIv.setImageResource(R.drawable.f3);
+        gridNameTv.setText(listViewItem.getName());
+        gridPhoneNumberTv.setText(listViewItem.getPhoneNumber());
 
         return convertView;
     }

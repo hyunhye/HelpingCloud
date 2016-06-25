@@ -10,5 +10,5 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/loadingIv"
-        android:src="@drawable/loading1"/>
+        android:background="@drawable/loading1"/>
 </LinearLayout>
