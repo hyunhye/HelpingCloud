@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
         if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.READ_CONTACTS) != PackageManager.PERMISSION_GRANTED
                 && ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED
                 && ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED
-                && ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED)) {
+                && ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(MainActivity.this,new String[]{ Manifest.permission.SEND_SMS}, PERMISSION_SEND_SMS);
             ActivityCompat.requestPermissions(MainActivity.this,new String[]{ Manifest.permission.WRITE_EXTERNAL_STORAGE}, PERMISSION_WRITE_EXTERNAL_STORAGE);
             ActivityCompat.requestPermissions(MainActivity.this,new String[]{ Manifest.permission.READ_EXTERNAL_STORAGE}, PERMISSION_READ_EXTERNAL_STORAGE);
@@ -237,9 +237,13 @@ public class MainActivity extends AppCompatActivity {
         sms.sendTextMessage(phoneNumber, null, message, sentPI, deliveredPI);
     }
     private void phoneCall(){
-        Uri uri = Uri.parse("tel:01012345678"); //전화와 관련된 Data는 'Tel:'으로 시작. 이후는 전화번호
-        Intent intent = new Intent(Intent.ACTION_CALL,uri); //시스템 액티비티인 Dial Activity의 action값
-        //startActivity(intent);
+        Uri uri = Uri.parse("tel:010-2757-3200");
+        Intent intent = new Intent(Intent.ACTION_CALL,uri);
+        try{
+            startActivity(intent);
+        }catch(SecurityException e){
+            Log.e("SecurityException", e.getMessage());
+        }
     }
     // SharedPreferences
     private void getPreferences(){
@@ -254,7 +258,8 @@ public class MainActivity extends AppCompatActivity {
                 Manifest.permission.ACCESS_FINE_LOCATION,
                 Manifest.permission.ACCESS_COARSE_LOCATION,
                 Manifest.permission.READ_EXTERNAL_STORAGE,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE
+                Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                Manifest.permission.CALL_PHONE
         };
 
         int permissionCheck = PackageManager.PERMISSION_GRANTED;
@@ -265,11 +270,11 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         if (permissionCheck == PackageManager.PERMISSION_GRANTED) {
-            Toast.makeText(this, "권한 있음", Toast.LENGTH_LONG).show();
+            //Toast.makeText(this, "권한 있음", Toast.LENGTH_LONG).show();
         } else {
-            Toast.makeText(this, "권한 없음", Toast.LENGTH_LONG).show();
+            //Toast.makeText(this, "권한 없음", Toast.LENGTH_LONG).show();
             if (ActivityCompat.shouldShowRequestPermissionRationale(this, permissions[0])) {
-                Toast.makeText(this, "권한 설명 필요함.", Toast.LENGTH_LONG).show();
+                //Toast.makeText(this, "권한 설명 필요함.", Toast.LENGTH_LONG).show();
             } else {
                 ActivityCompat.requestPermissions(this, permissions, 1);
             }
@@ -280,9 +285,9 @@ public class MainActivity extends AppCompatActivity {
         if (requestCode == 1) {
             for (int i = 0; i < permissions.length; i++) {
                 if (grantResults[i] == PackageManager.PERMISSION_GRANTED) {
-                    Toast.makeText(this, permissions[i] + " 권한이 승인됨.", Toast.LENGTH_LONG).show();
+                    //Toast.makeText(this, permissions[i] + " 권한이 승인됨.", Toast.LENGTH_LONG).show();
                 } else {
-                    Toast.makeText(this, permissions[i] + " 권한이 승인되지 않음.", Toast.LENGTH_LONG).show();
+                    //Toast.makeText(this, permissions[i] + " 권한이 승인되지 않음.", Toast.LENGTH_LONG).show();
                 }
             }
         }
