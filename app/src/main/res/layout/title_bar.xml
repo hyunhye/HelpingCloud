@@ -6,6 +6,7 @@
             android:id="@+id/title_devices"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:text="@string/app_name">
+            android:textSize="30dp"
+            android:text="Bluetooth 장치 연결">
     </TextView>
 </LinearLayout>

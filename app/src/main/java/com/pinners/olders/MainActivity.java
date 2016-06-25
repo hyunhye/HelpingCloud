@@ -35,6 +35,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.telephony.SmsManager;
+import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -83,6 +84,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
     private static final int REQUEST_SELECT_DEVICE = 1;
     private static final int REQUEST_ENABLE_BT = 2;
+    private static final int FINISH_SPLASH = 3;
     private static final int UART_PROFILE_READY = 10;
     public static final String TAG = "nRFUART";
     private static final int UART_PROFILE_CONNECTED = 20;
@@ -128,9 +130,12 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     String deviceAddress = null;
     private String fontSize = "small";
 
+    TelephonyManager tMgr;
+    String mPhoneNumber;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        startActivity(new Intent(this, SplashActivity.class));
+        startActivityForResult(new Intent(this, SplashActivity.class),FINISH_SPLASH);
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -139,6 +144,9 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         //        WindowManager.LayoutParams.FLAG_FULLSCREEN);
         android.support.v7.app.ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
+
+        TelephonyManager tMgr = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
+        mPhoneNumber = tMgr.getLine1Number();
 
         // Permission
         checkDangerousPermissions();
@@ -168,8 +176,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         }
 
 
-//        AcceratorAndBluetooth init
-        initAcceratorAndBluetooth();
+
 
         // Button Click Listener
         profileBtn.setOnClickListener(new View.OnClickListener() {
@@ -212,13 +219,15 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             public void onClick(View v) {
                 List<Contact> contactLists = db.getAllContacts();
 
-                if(contactLists == null){
+                if(contactLists.size() == 0){
                         phoneCall(DEFAULT_PHONE_NUMBER);
                 }
                 else{
 
                     for(Contact contact:contactLists){
-                        sendSMS(contact.getPhoneNumber(), "http://maps.google.com/maps?q="+lat+","+lng);
+                        sendSMS(contact.getPhoneNumber(), mPhoneNumber+"의 주인에게 낙상사고가 발생하였습니다\n" +
+                                "\n" +
+                                "낙상사고 위치 보기 : http://maps.google.com/maps?q="+lat+","+lng);
                         if(firstData == 0){
                             phoneCall(contact.getPhoneNumber());
                             firstData = 1;
@@ -242,6 +251,8 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     @Override
     protected  void onResume(){
         super.onResume();
+        mBtAdapter = BluetoothAdapter.getDefaultAdapter();
+        mSensorManager = (SensorManager)getSystemService(Context.SENSOR_SERVICE);
         getPreferences();
         try{
             Bitmap bitMapImage = BitmapFactory.decodeFile(Environment.getExternalStorageDirectory().getAbsolutePath()+"/"+folderName+"/"+backgroundName+".jpg");
@@ -756,6 +767,10 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                     finish();
                 }
                 break;
+            case FINISH_SPLASH:
+                //        AcceratorAndBluetooth init
+                initAcceratorAndBluetooth();
+                break;
             default:
                 Log.e(TAG, "wrong request code");
                 break;
@@ -825,7 +840,9 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                     else{
 
                         for(Contact contact:contactLists){
-                            sendSMS(contact.getPhoneNumber(), "http://maps.google.com/maps?q="+lat+","+lng);
+                            sendSMS(contact.getPhoneNumber(), mPhoneNumber+"의 주인에게 낙상사고가 발생하였습니다\n" +
+                                    "\n" +
+                                    "낙상사고 위치 보기 : http://maps.google.com/maps?q="+lat+","+lng);
                             if(firstData == 0){
                                 phoneCall(contact.getPhoneNumber());
                                 firstData = 1;
@@ -849,7 +866,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         }
 
         // 15 ~         : 넘어진다.
-        else if (total > 14) {
+        else if (total > 13) {
             if (gyro){
                 switch (flag) {
                     case 0:     // 넘어지 않은 상태였고 넘어지셨네여   (타이머 걸고, 5초뒤에 다시 체크)
@@ -917,7 +934,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                         double somethingz = (float) (sinThetaOverTwo * axisZ);
                         double somethingw = (-(float) cosThetaOverTwo);
 
-                        if(0.2d < gyroscopeRotationVelocity && gyroscopeRotationVelocity < 4.0d)
+                        if(0.2d < gyroscopeRotationVelocity && gyroscopeRotationVelocity < 1.5d)
                         {
                             gyro = false;
                         }

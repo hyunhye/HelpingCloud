@@ -70,8 +70,14 @@ public class DeviceListActivity extends Activity {
 
         super.onCreate(savedInstanceState);
         Log.d(TAG, "onCreate");
-        getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.title_bar);
+//        getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.title_bar);
+//        requestWindowFeature(Window.FEATURE_NO_TITLE)
         setContentView(R.layout.device_list);
+//        android.support.v7.app.ActionBar actionBar = getSupportActionBar();
+//        actionBar.setBackgroundDrawable(getResources().getDrawable(R.drawable.setting_actionbar));
+//        actionBar.setDisplayHomeAsUpEnabled(true);
+//        actionBar.setTitle("설정");;
+
         android.view.WindowManager.LayoutParams layoutParams = this.getWindow().getAttributes();
         layoutParams.gravity=Gravity.TOP;
         layoutParams.y = 200;
@@ -294,20 +300,20 @@ public class DeviceListActivity extends Activity {
             tvadd.setText(device.getAddress());
             if (device.getBondState() == BluetoothDevice.BOND_BONDED) {
                 Log.i(TAG, "device::"+device.getName());
-                tvname.setTextColor(Color.WHITE);
-                tvadd.setTextColor(Color.WHITE);
-                tvpaired.setTextColor(Color.GRAY);
+                tvname.setTextColor(Color.BLACK);
+                tvadd.setTextColor(Color.BLACK);
+                tvpaired.setTextColor(Color.BLACK);
                 tvpaired.setVisibility(View.VISIBLE);
                 tvpaired.setText(R.string.paired);
                 tvrssi.setVisibility(View.VISIBLE);
-                tvrssi.setTextColor(Color.WHITE);
+                tvrssi.setTextColor(Color.BLACK);
 
             } else {
-                tvname.setTextColor(Color.WHITE);
-                tvadd.setTextColor(Color.WHITE);
+                tvname.setTextColor(Color.BLACK);
+                tvadd.setTextColor(Color.BLACK);
                 tvpaired.setVisibility(View.GONE);
                 tvrssi.setVisibility(View.VISIBLE);
-                tvrssi.setTextColor(Color.WHITE);
+                tvrssi.setTextColor(Color.BLACK);
             }
             return vg;
         }

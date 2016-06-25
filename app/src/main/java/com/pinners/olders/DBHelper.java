@@ -80,7 +80,6 @@ public class DBHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery, null);
 
 
-        if(cursor != null) {
             // looping through all rows and adding to list
             if (cursor.moveToFirst()) {
                 do {
@@ -94,10 +93,6 @@ public class DBHelper extends SQLiteOpenHelper {
                     contactList.add(contact);
                 } while (cursor.moveToNext());
             }
-        }
-        else{
-            return null;
-        }
         // return contact list
         return contactList;
     }
