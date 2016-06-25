@@ -1,8 +1,10 @@
 package com.pinners.olders;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -43,12 +45,15 @@ public class FavoriteContactsActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Contact item = (Contact) parent.getItemAtPosition(position) ;
+                /*
                 Intent intent =  new Intent(FavoriteContactsActivity.this, RegistrationModifyActivity.class);
                 intent.putExtra("itemId",position);
                 intent.putExtra("itemName", item.getName().toString());
                 intent.putExtra("itemPhoneNumber",item.getPhoneNumber().toString());
                 intent.putExtra("itemFavorite",item.getFavorite().toString());
                 startActivity(intent);
+                */
+                phoneCall(item.getPhoneNumber());
             }
         });
     }
@@ -60,6 +65,15 @@ public class FavoriteContactsActivity extends AppCompatActivity {
         db = new DBHelper(this);
     }
 
+    private void phoneCall(String phoneNumber){
+        Uri uri = Uri.parse("tel:"+phoneNumber);
+        Intent intent = new Intent(Intent.ACTION_CALL,uri);
+        try{
+            startActivity(intent);
+        }catch(SecurityException e){
+            Log.e("SecurityException", e.getMessage());
+        }
+    }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {

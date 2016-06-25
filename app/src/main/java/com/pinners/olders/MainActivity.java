@@ -177,6 +177,9 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
                 intent.putExtra("myName",nameTv.getText().toString());
+                if(nameTv.getText().toString().equals("이름")){
+                    intent.putExtra("myName","");
+                }
                 intent.putExtra("myPhoneNumber",phoneNumberTv.getText().toString());
                 intent.putExtra("myGroup",groupTv.getText().toString());
                 startActivity(intent);
@@ -386,6 +389,9 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     private void getPreferences(){
         SharedPreferences pref = getSharedPreferences("pref", MODE_PRIVATE);
         nameTv.setText( pref.getString("myName", ""));
+        if(nameTv.getText().toString().equals("")){
+            nameTv.setText("이름");
+        }
         phoneNumberTv.setText(pref.getString("myPhoneNumber", ""));
         groupTv.setText(pref.getString("myGroup", ""));
         fontSize = pref.getString("fontSize","");
