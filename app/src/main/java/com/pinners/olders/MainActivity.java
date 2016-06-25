@@ -47,23 +47,20 @@ import java.util.List;
 import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
-    ImageButton registrationBtn, favoriteContactBtn, settingBtn, profileBtn;
-    Button sendMsgBtn;
-    TextView nameTv;
-    TextView phoneNumberTv;
-    TextView groupTv;
-    LinearLayout profileBackgroundL;
+    private ImageButton registrationBtn, favoriteContactBtn, settingBtn, profileBtn;
+    private Button sendMsgBtn;
+    private TextView nameTv, phoneNumberTv, groupTv;
+    private LinearLayout profileBackgroundL;
 
-    private static final int PERMISSION_SEND_SMS = 101;
-    private static final int PERMISSION_WRITE_EXTERNAL_STORAGE = 102;
-    private static final int PERMISSION_READ_EXTERNAL_STORAGE = 103;
-    private static final int PERMISSION_CALL_PHONE = 104;
     private static final String folderName = "HelpingCloud";
     private static final String backgroundName = "background";
 
     DBHelper db;
     GPSTracker gps;
     double lng=0, lat=0;
+
+    private String fontSize = "small";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         startActivity(new Intent(this, SplashActivity.class));
@@ -72,16 +69,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         // Permission
-        if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.READ_CONTACTS) != PackageManager.PERMISSION_GRANTED
-                && ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED
-                && ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED
-                && ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(MainActivity.this,new String[]{ Manifest.permission.SEND_SMS}, PERMISSION_SEND_SMS);
-            ActivityCompat.requestPermissions(MainActivity.this,new String[]{ Manifest.permission.WRITE_EXTERNAL_STORAGE}, PERMISSION_WRITE_EXTERNAL_STORAGE);
-            ActivityCompat.requestPermissions(MainActivity.this,new String[]{ Manifest.permission.READ_EXTERNAL_STORAGE}, PERMISSION_READ_EXTERNAL_STORAGE);
-            ActivityCompat.requestPermissions(MainActivity.this,new String[]{ Manifest.permission.CALL_PHONE}, PERMISSION_CALL_PHONE);
-        }
-
         checkDangerousPermissions();
 
         // Init
@@ -136,7 +123,7 @@ public class MainActivity extends AppCompatActivity {
         sendMsgBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //sendSMS("01027573200", "http://maps.google.com/maps?q="+lat+","+lng);
+                sendSMS("01027573200", "http://maps.google.com/maps?q="+lat+","+lng);
                 phoneCall();
             }
         });
@@ -236,6 +223,7 @@ public class MainActivity extends AppCompatActivity {
         SmsManager sms = SmsManager.getDefault();
         sms.sendTextMessage(phoneNumber, null, message, sentPI, deliveredPI);
     }
+
     private void phoneCall(){
         Uri uri = Uri.parse("tel:010-2757-3200");
         Intent intent = new Intent(Intent.ACTION_CALL,uri);
@@ -245,12 +233,25 @@ public class MainActivity extends AppCompatActivity {
             Log.e("SecurityException", e.getMessage());
         }
     }
+
     // SharedPreferences
     private void getPreferences(){
         SharedPreferences pref = getSharedPreferences("pref", MODE_PRIVATE);
         nameTv.setText( pref.getString("myName", ""));
         phoneNumberTv.setText(pref.getString("myPhoneNumber", ""));
         groupTv.setText(pref.getString("myGroup", ""));
+        fontSize = pref.getString("fontSize","");
+        if(fontSize.equals("small")){
+            nameTv.setTextSize(15);
+            phoneNumberTv.setTextSize(15);
+            groupTv.setTextSize(15);
+        }
+        else{
+            nameTv.setTextSize(25);
+            phoneNumberTv.setTextSize(25);
+            groupTv.setTextSize(25);
+        }
+
     }
 
     private void checkDangerousPermissions() {
@@ -259,7 +260,10 @@ public class MainActivity extends AppCompatActivity {
                 Manifest.permission.ACCESS_COARSE_LOCATION,
                 Manifest.permission.READ_EXTERNAL_STORAGE,
                 Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                Manifest.permission.CALL_PHONE
+                Manifest.permission.CALL_PHONE,
+                Manifest.permission.SEND_SMS,
+                Manifest.permission.READ_CONTACTS
+
         };
 
         int permissionCheck = PackageManager.PERMISSION_GRANTED;
