@@ -2,9 +2,11 @@ package com.pinners.olders;
 
 import android.content.Intent;
 import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -91,18 +93,20 @@ public class ContactsActivity  extends AppCompatActivity {
         favoriteContactListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
                 Contact item = (Contact) parent.getItemAtPosition(position) ;
+                /*
                 Intent intent =  new Intent(ContactsActivity.this, RegistrationModifyActivity.class);
                 intent.putExtra("itemId",position);
                 intent.putExtra("itemName", item.getName().toString());
                 intent.putExtra("itemPhoneNumber",item.getPhoneNumber().toString());
                 intent.putExtra("itemFavorite",item.getFavorite().toString());
                 startActivity(intent);
+                */
+                phoneCall(item.getPhoneNumber());
             }
         });
     }
-
-
 
     void init(){
         contactsBtn = (ImageButton) findViewById(R.id.contactsBtn);
@@ -115,6 +119,7 @@ public class ContactsActivity  extends AppCompatActivity {
         firstLayout = (LinearLayout) findViewById(R.id.firstLayout);
         secondLayout = (LinearLayout) findViewById(R.id.secondLayout);
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == RESULT_OK){
@@ -131,5 +136,15 @@ public class ContactsActivity  extends AppCompatActivity {
             startActivity(intent);
         }
         super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    private void phoneCall(String phoneNumber){
+        Uri uri = Uri.parse("tel:"+phoneNumber);
+        Intent intent = new Intent(Intent.ACTION_CALL,uri);
+        try{
+            startActivity(intent);
+        }catch(SecurityException e){
+            Log.e("SecurityException", e.getMessage());
+        }
     }
 }

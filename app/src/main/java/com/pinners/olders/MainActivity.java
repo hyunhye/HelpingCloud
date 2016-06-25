@@ -32,10 +32,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -50,7 +52,8 @@ public class MainActivity extends AppCompatActivity {
     private ImageButton registrationBtn, favoriteContactBtn, settingBtn, profileBtn;
     private Button sendMsgBtn;
     private TextView nameTv, phoneNumberTv, groupTv;
-    private LinearLayout profileBackgroundL;
+    private TextView favoriteTv1, favoriteTv2, contactsTv1, contactsTv2, settingTv1, settingTv2, positionTv1, positionTv2;
+    private ImageView profileBackgroundIv;
 
     private static final String folderName = "HelpingCloud";
     private static final String backgroundName = "background";
@@ -68,6 +71,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+        //        WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        android.support.v7.app.ActionBar actionBar = getSupportActionBar();
+        actionBar.hide();
+
         // Permission
         checkDangerousPermissions();
 
@@ -80,10 +88,10 @@ public class MainActivity extends AppCompatActivity {
         try{
             Bitmap bitMapImage = BitmapFactory.decodeFile(Environment.getExternalStorageDirectory().getAbsolutePath()+"/"+folderName+"/"+backgroundName+".jpg");
             Drawable drawableProfileBackgroundImage = new BitmapDrawable(getResources(), bitMapImage);
-            profileBackgroundL.setBackground(drawableProfileBackgroundImage);
+            profileBackgroundIv.setBackground(drawableProfileBackgroundImage);
         }catch(Exception e){
             Log.e("Exception", e.getMessage());
-            profileBackgroundL.setBackgroundColor(Color.BLACK);
+            profileBackgroundIv.setBackgroundColor(Color.BLACK);
         }
 
         // GPS
@@ -99,6 +107,11 @@ public class MainActivity extends AppCompatActivity {
         profileBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(profileBtn.isFocused()){
+                    profileBtn.setImageResource(R.drawable.ok_gray1);
+                } else{
+                    profileBtn.setImageResource(R.drawable.ok1);
+                }
                 Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
                 intent.putExtra("myName",nameTv.getText().toString());
                 intent.putExtra("myPhoneNumber",phoneNumberTv.getText().toString());
@@ -142,10 +155,10 @@ public class MainActivity extends AppCompatActivity {
         try{
             Bitmap bitMapImage = BitmapFactory.decodeFile(Environment.getExternalStorageDirectory().getAbsolutePath()+"/"+folderName+"/"+backgroundName+".jpg");
             Drawable drawableProfileBackgroundImage = new BitmapDrawable(getResources(), bitMapImage);
-            profileBackgroundL.setBackground(drawableProfileBackgroundImage);
+            profileBackgroundIv.setBackground(drawableProfileBackgroundImage);
         }catch(Exception e){
             Log.e("Exception", e.getMessage());
-            profileBackgroundL.setBackgroundColor(Color.BLACK);
+            profileBackgroundIv.setBackgroundColor(Color.BLACK);
         }
     }
 
@@ -158,7 +171,15 @@ public class MainActivity extends AppCompatActivity {
         nameTv = (TextView) findViewById(R.id.nameTv);
         phoneNumberTv = (TextView) findViewById(R.id.phoneNumberTv);
         groupTv = (TextView) findViewById(R.id.groupTv);
-        profileBackgroundL = (LinearLayout) findViewById(R.id.profileBackgroundL);
+        profileBackgroundIv = (ImageView) findViewById(R.id.profileBackgroundIv);
+        favoriteTv1=(TextView) findViewById(R.id.favoriteTv1);
+        favoriteTv2=(TextView) findViewById(R.id.favoriteTv2);
+        contactsTv1=(TextView) findViewById(R.id.contactsTv1);
+        contactsTv2=(TextView) findViewById(R.id.contactsTv2);
+        settingTv1=(TextView) findViewById(R.id.settingTv1);
+        settingTv2=(TextView) findViewById(R.id.settingTv2);
+        positionTv1=(TextView) findViewById(R.id.positionTv1);
+        positionTv2=(TextView) findViewById(R.id.positionTv2);
         db = new DBHelper(this);
     }
 
@@ -234,7 +255,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    // SharedPreferences
     private void getPreferences(){
         SharedPreferences pref = getSharedPreferences("pref", MODE_PRIVATE);
         nameTv.setText( pref.getString("myName", ""));
@@ -245,11 +265,29 @@ public class MainActivity extends AppCompatActivity {
             nameTv.setTextSize(15);
             phoneNumberTv.setTextSize(15);
             groupTv.setTextSize(15);
+
+            favoriteTv1.setTextSize(18);
+            favoriteTv2.setTextSize(13);
+            contactsTv1.setTextSize(18);
+            contactsTv2.setTextSize(13);
+            settingTv1.setTextSize(18);
+            settingTv2.setTextSize(13);
+            positionTv1.setTextSize(18);
+            positionTv2.setTextSize(13);
         }
         else{
             nameTv.setTextSize(25);
             phoneNumberTv.setTextSize(25);
             groupTv.setTextSize(25);
+
+            favoriteTv1.setTextSize(26);
+            favoriteTv2.setTextSize(15);
+            contactsTv1.setTextSize(26);
+            contactsTv2.setTextSize(15);
+            settingTv1.setTextSize(26);
+            settingTv2.setTextSize(15);
+            positionTv1.setTextSize(26);
+            positionTv2.setTextSize(15);
         }
 
     }
@@ -263,7 +301,6 @@ public class MainActivity extends AppCompatActivity {
                 Manifest.permission.CALL_PHONE,
                 Manifest.permission.SEND_SMS,
                 Manifest.permission.READ_CONTACTS
-
         };
 
         int permissionCheck = PackageManager.PERMISSION_GRANTED;
@@ -284,6 +321,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
+
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         if (requestCode == 1) {
