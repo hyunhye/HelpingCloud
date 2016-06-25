@@ -1,12 +1,13 @@
 package com.pinners.olders;
 
-import java.util.ArrayList;
-import java.util.List;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Administrator on 2016-06-21.
@@ -78,20 +79,25 @@ public class DBHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
 
-        // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Contact contact = new Contact();
-                contact.setID(Integer.parseInt(cursor.getString(0)));
-                contact.setName(cursor.getString(1));
-                contact.setPhoneNumber(cursor.getString(2));
-                contact.setFavorite(cursor.getString(3));
 
-                // Adding contact to list
-                contactList.add(contact);
-            } while (cursor.moveToNext());
+        if(cursor != null) {
+            // looping through all rows and adding to list
+            if (cursor.moveToFirst()) {
+                do {
+                    Contact contact = new Contact();
+                    contact.setID(Integer.parseInt(cursor.getString(0)));
+                    contact.setName(cursor.getString(1));
+                    contact.setPhoneNumber(cursor.getString(2));
+                    contact.setFavorite(cursor.getString(3));
+
+                    // Adding contact to list
+                    contactList.add(contact);
+                } while (cursor.moveToNext());
+            }
         }
-
+        else{
+            return null;
+        }
         // return contact list
         return contactList;
     }
