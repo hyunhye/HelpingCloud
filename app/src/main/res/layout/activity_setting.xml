@@ -97,21 +97,25 @@
                 android:text="텍스트 크기 조절"
                 android:textColor="#000000"
                 />
-
-            <RadioButton
+            <RadioGroup
+                android:id="@+id/settingFontRg"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="크게 (150%)"
-                android:textColor="#000000"
-                android:id="@+id/settingFontBigRb" />
+                android:layout_height="wrap_content" >
 
-            <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="작게 (100%)"
-                android:textColor="#000000"
-                android:id="@+id/settingFontSmallRb" />
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="크게 (150%)"
+                    android:textColor="#000000"
+                    android:id="@+id/settingFontBigRb" />
 
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="작게 (100%)"
+                    android:textColor="#000000"
+                    android:id="@+id/settingFontSmallRb" />
+            </RadioGroup>
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>
