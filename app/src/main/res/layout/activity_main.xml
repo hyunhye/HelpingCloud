@@ -10,7 +10,7 @@
     <FrameLayout
         android:id="@+id/viewA"
         android:layout_width="match_parent"
-        android:layout_height="180dp">
+        android:layout_height="190dp">
 
         <LinearLayout
             android:orientation="vertical"
@@ -36,13 +36,14 @@
                 android:background="@drawable/background"
                 android:id="@+id/profileBackgroundIv" />
 
-            <RelativeLayout
+            <FrameLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
                 android:padding="10dp"
                 android:background="#00000000">
+
                 <LinearLayout
                     android:orientation="vertical"
                     android:layout_width="wrap_content"
@@ -58,9 +59,11 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginBottom="3dp"
                             android:textColor="#ffffff"
                             android:text="홍길동"
-                            android:textSize="40px"
+                            android:textStyle="bold"
+                            android:textSize="26sp"
                             android:id="@+id/nameTv" />
                     </LinearLayout>
 
@@ -69,16 +72,19 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
                         <TextView
+                            android:id="@+id/phoneNumberStaticTv"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginRight="20dp"
+                            android:textSize="17sp"
                             android:textColor="#ffffff"
-                            android:text="내번호" />
+                            android:text="내 번호" />
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="#ffffff"
                             android:text="01000000000"
+                            android:textSize="26sp"
                             android:id="@+id/phoneNumberTv" />
                     </LinearLayout>
                     <LinearLayout
@@ -87,9 +93,11 @@
                         android:layout_height="wrap_content">
 
                         <TextView
+                            android:id="@+id/groupStaticTv"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginRight="20dp"
+                            android:textSize="17sp"
                             android:textColor="#ffffff"
                             android:text="소속" />
                         <TextView
@@ -97,25 +105,31 @@
                             android:layout_height="wrap_content"
                             android:textColor="#ffffff"
                             android:text="피너스"
+                            android:textSize="26sp"
                             android:id="@+id/groupTv" />
                     </LinearLayout>
                 </LinearLayout>
-                <LinearLayout
+
+                <RelativeLayout
                     android:orientation="vertical"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentEnd="true">
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_gravity="right|bottom">
+
                     <ImageButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:paddingTop="20dp"
                         android:layout_alignParentEnd="true"
                         android:src="@drawable/profile"
                         android:background="#00000000"
                         android:id="@+id/profileBtn" />
-                </LinearLayout>
-            </RelativeLayout>
+                 </RelativeLayout>
+            </FrameLayout>
         </FrameLayout>
     </FrameLayout>
 
@@ -145,7 +159,7 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
+                    android:layout_marginBottom="5dp"
                     android:orientation="vertical"
                     android:gravity="center"
                     android:layout_weight="1">
@@ -153,6 +167,7 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
                         android:layout_gravity="center"
                         android:src="@drawable/favorite"
                         android:background="#00000000" />
@@ -161,7 +176,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
-                        android:layout_weight="1"
                         android:layout_gravity="center"
                         android:textSize="26sp"
                         android:textStyle="bold"
@@ -172,16 +186,17 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:textSize="15sp"
-                        android:text="한번 클릭에 곧바로 통화연결"/>
+                        android:text="한번클릭시에 곧바로 통화연결"/>
                     <ImageButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
                         android:layout_marginBottom="5dp"
                         android:layout_gravity="center"
-                        android:src="@drawable/ok1"
+                        android:src="@drawable/favorite_button"
                         android:background="#00000000"
                         android:id="@+id/favoriteContactBtn" />
+
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -194,6 +209,7 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
                         android:layout_gravity="center"
                         android:src="@drawable/contacts"
                         android:background="#00000000" />
@@ -212,14 +228,14 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:textSize="15sp"
-                        android:text="응급상황시 메세지 전솔 될 연락처"/>
+                        android:text="응급상황시 메세지 전송될 연락처"/>
                     <ImageButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
                         android:layout_marginBottom="5dp"
                         android:layout_gravity="center"
-                        android:src="@drawable/ok2"
+                        android:src="@drawable/contacts_button"
                         android:background="#00000000"
                         android:id="@+id/registrationBtn" />
 
@@ -241,6 +257,7 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
                         android:layout_gravity="center"
                         android:src="@drawable/setting"
                         android:background="#00000000" />
@@ -259,14 +276,14 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:textSize="15sp"
-                        android:text="헬핑클라우드 배지와 앱 설정 관리"/>
+                        android:text="헬핑클라우드뱃지와 앱설정 관리"/>
                     <ImageButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
                         android:layout_marginBottom="5dp"
                         android:layout_gravity="center"
-                        android:src="@drawable/ok3"
+                        android:src="@drawable/setting_button"
                         android:background="#00000000"
                         android:id="@+id/settingBtn" />
                 </LinearLayout>
@@ -280,6 +297,7 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
                         android:layout_gravity="center"
                         android:src="@drawable/position"
                         android:background="#00000000" />
@@ -306,7 +324,7 @@
                         android:layout_marginTop="10dp"
                         android:layout_marginBottom="5dp"
                         android:layout_gravity="center"
-                        android:src="@drawable/ok4"
+                        android:src="@drawable/position_button"
                         android:background="#00000000"
                         android:id="@+id/accidentPositionBtn" />
                 </LinearLayout>

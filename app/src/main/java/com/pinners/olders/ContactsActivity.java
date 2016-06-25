@@ -1,5 +1,6 @@
 package com.pinners.olders;
 
+import android.app.ActionBar;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
@@ -37,6 +38,10 @@ public class ContactsActivity  extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contacts);
+
+        android.support.v7.app.ActionBar actionBar = getSupportActionBar();
+        actionBar.setBackgroundDrawable(getResources().getDrawable(R.drawable.contacts_actionbar));
+
         init();
 
         contacts = db.getAllContacts();

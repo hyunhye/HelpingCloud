@@ -51,7 +51,7 @@ import java.util.Locale;
 public class MainActivity extends AppCompatActivity {
     private ImageButton registrationBtn, favoriteContactBtn, settingBtn, profileBtn;
     private Button sendMsgBtn;
-    private TextView nameTv, phoneNumberTv, groupTv;
+    private TextView nameTv, phoneNumberTv, groupTv, phoneNumberStaticTv, groupStaticTv;
     private TextView favoriteTv1, favoriteTv2, contactsTv1, contactsTv2, settingTv1, settingTv2, positionTv1, positionTv2;
     private ImageView profileBackgroundIv;
 
@@ -107,11 +107,6 @@ public class MainActivity extends AppCompatActivity {
         profileBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(profileBtn.isFocused()){
-                    profileBtn.setImageResource(R.drawable.ok_gray1);
-                } else{
-                    profileBtn.setImageResource(R.drawable.ok1);
-                }
                 Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
                 intent.putExtra("myName",nameTv.getText().toString());
                 intent.putExtra("myPhoneNumber",phoneNumberTv.getText().toString());
@@ -171,6 +166,8 @@ public class MainActivity extends AppCompatActivity {
         nameTv = (TextView) findViewById(R.id.nameTv);
         phoneNumberTv = (TextView) findViewById(R.id.phoneNumberTv);
         groupTv = (TextView) findViewById(R.id.groupTv);
+        phoneNumberStaticTv = (TextView) findViewById(R.id.phoneNumberStaticTv);
+        groupStaticTv = (TextView) findViewById(R.id.groupStaticTv);
         profileBackgroundIv = (ImageView) findViewById(R.id.profileBackgroundIv);
         favoriteTv1=(TextView) findViewById(R.id.favoriteTv1);
         favoriteTv2=(TextView) findViewById(R.id.favoriteTv2);
@@ -262,9 +259,11 @@ public class MainActivity extends AppCompatActivity {
         groupTv.setText(pref.getString("myGroup", ""));
         fontSize = pref.getString("fontSize","");
         if(fontSize.equals("small")){
-            nameTv.setTextSize(15);
-            phoneNumberTv.setTextSize(15);
-            groupTv.setTextSize(15);
+            nameTv.setTextSize(30);
+            phoneNumberTv.setTextSize(18);
+            groupTv.setTextSize(18);
+            phoneNumberStaticTv.setTextSize(15);
+            groupStaticTv.setTextSize(15);
 
             favoriteTv1.setTextSize(18);
             favoriteTv2.setTextSize(13);
@@ -274,11 +273,15 @@ public class MainActivity extends AppCompatActivity {
             settingTv2.setTextSize(13);
             positionTv1.setTextSize(18);
             positionTv2.setTextSize(13);
+
+            profileBtn.setPadding(0,0,0,0);
         }
         else{
-            nameTv.setTextSize(25);
-            phoneNumberTv.setTextSize(25);
-            groupTv.setTextSize(25);
+            nameTv.setTextSize(32);
+            phoneNumberTv.setTextSize(26);
+            groupTv.setTextSize(26);
+            phoneNumberStaticTv.setTextSize(17);
+            groupStaticTv.setTextSize(17);
 
             favoriteTv1.setTextSize(26);
             favoriteTv2.setTextSize(15);
@@ -288,6 +291,8 @@ public class MainActivity extends AppCompatActivity {
             settingTv2.setTextSize(15);
             positionTv1.setTextSize(26);
             positionTv2.setTextSize(15);
+
+            profileBtn.setPadding(0,30,0,0);
         }
 
     }
