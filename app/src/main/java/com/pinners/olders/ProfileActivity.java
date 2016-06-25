@@ -7,6 +7,9 @@ import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -15,9 +18,12 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -29,7 +35,10 @@ import java.io.IOException;
  */
 public class ProfileActivity extends AppCompatActivity {
     private EditText myNameEt, myPhoneNumberEt, myGroupEt;
-    private Button profileOkBtn, profileImageBtn;
+    private ImageButton  profileImageBtn;
+    private ImageButton profileOkBtn;
+    private ImageView profileBackgroundIv2;
+
     String myName;
     String myPhoneNumber;
     String myGroup;
@@ -46,6 +55,11 @@ public class ProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
+        android.support.v7.app.ActionBar actionBar = getSupportActionBar();
+        actionBar.setBackgroundDrawable(getResources().getDrawable(R.drawable.profile_actionbar));
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setTitle("내 정보");
+
         if (ContextCompat.checkSelfPermission(ProfileActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED
                 && ContextCompat.checkSelfPermission(ProfileActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(ProfileActivity.this,new String[]{ Manifest.permission.WRITE_EXTERNAL_STORAGE}, PERMISSION_WRITE_EXTERNAL_STORAGE);
@@ -53,6 +67,15 @@ public class ProfileActivity extends AppCompatActivity {
         }
 
         init();
+
+        try{
+            Bitmap bitMapImage = BitmapFactory.decodeFile(Environment.getExternalStorageDirectory().getAbsolutePath()+"/"+folderName+"/"+backgroundName+".jpg");
+            Drawable drawableProfileBackgroundImage = new BitmapDrawable(getResources(), bitMapImage);
+            profileBackgroundIv2.setBackground(drawableProfileBackgroundImage);
+        }catch(Exception e){
+            Log.e("Exception", e.getMessage());
+            profileBackgroundIv2.setBackgroundColor(Color.BLACK);
+        }
 
         Intent intent = getIntent();
         myName = intent.getStringExtra("myName");
@@ -89,8 +112,9 @@ public class ProfileActivity extends AppCompatActivity {
         myNameEt = (EditText) findViewById(R.id.myNameEt);
         myPhoneNumberEt = (EditText) findViewById(R.id.myPhoneNumberEt);
         myGroupEt = (EditText) findViewById(R.id.myGroupEt);
-        profileOkBtn = (Button) findViewById(R.id.profileOkBtn);
-        profileImageBtn = (Button) findViewById(R.id.profileImageBtn);
+        profileOkBtn = (ImageButton) findViewById(R.id.profileOkBtn);
+        profileImageBtn = (ImageButton) findViewById(R.id.profileImageBtn);
+        profileBackgroundIv2 = (ImageView) findViewById(R.id.profileBackgroundIv2);
     }
     private void savePreferences(String myName, String myPhoneNumber, String myGroup, Bitmap profilePhoto){
         SharedPreferences pref = getSharedPreferences("pref", MODE_PRIVATE);
@@ -118,6 +142,15 @@ public class ProfileActivity extends AppCompatActivity {
 
             profilePhoto = BitmapFactory.decodeFile(imagePath);
             saveBitmaptoJpeg(profilePhoto, folderName, backgroundName);
+
+            try{
+                Bitmap bitMapImage = BitmapFactory.decodeFile(Environment.getExternalStorageDirectory().getAbsolutePath()+"/"+folderName+"/"+backgroundName+".jpg");
+                Drawable drawableProfileBackgroundImage = new BitmapDrawable(getResources(), bitMapImage);
+                profileBackgroundIv2.setBackground(drawableProfileBackgroundImage);
+            }catch(Exception e){
+                Log.e("Exception", e.getMessage());
+                profileBackgroundIv2.setBackgroundColor(Color.BLACK);
+            }
         }
     }
 
@@ -141,5 +174,15 @@ public class ProfileActivity extends AppCompatActivity {
         }catch(IOException exception){
             Log.e("IOException", exception.getMessage());
         }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

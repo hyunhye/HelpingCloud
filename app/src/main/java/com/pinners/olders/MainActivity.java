@@ -14,46 +14,31 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.location.Geocoder;
-import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Environment;
-import android.provider.ContactsContract;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.database.Cursor;
 import android.telephony.SmsManager;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.WindowManager;
-import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
-    private ImageButton registrationBtn, favoriteContactBtn, settingBtn, profileBtn;
+    private ImageButton registrationBtn, favoriteContactBtn, settingBtn, profileBtn, accidentPositionBtn;
     private Button sendMsgBtn;
     private TextView nameTv, phoneNumberTv, groupTv, phoneNumberStaticTv, groupStaticTv;
     private TextView favoriteTv1, favoriteTv2, contactsTv1, contactsTv2, settingTv1, settingTv2, positionTv1, positionTv2;
     private ImageView profileBackgroundIv;
+    private LinearLayout l1,l2;
 
     private static final String folderName = "HelpingCloud";
     private static final String backgroundName = "background";
@@ -128,6 +113,14 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        accidentPositionBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, PositionActivity.class);
+                startActivity(intent);
+            }
+        });
+
         sendMsgBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -163,6 +156,7 @@ public class MainActivity extends AppCompatActivity {
         favoriteContactBtn = (ImageButton) findViewById(R.id.favoriteContactBtn);
         settingBtn= (ImageButton) findViewById(R.id.settingBtn);
         profileBtn =(ImageButton) findViewById(R.id.profileBtn);
+        accidentPositionBtn = (ImageButton) findViewById(R.id.accidentPositionBtn);
         nameTv = (TextView) findViewById(R.id.nameTv);
         phoneNumberTv = (TextView) findViewById(R.id.phoneNumberTv);
         groupTv = (TextView) findViewById(R.id.groupTv);
@@ -177,6 +171,8 @@ public class MainActivity extends AppCompatActivity {
         settingTv2=(TextView) findViewById(R.id.settingTv2);
         positionTv1=(TextView) findViewById(R.id.positionTv1);
         positionTv2=(TextView) findViewById(R.id.positionTv2);
+        l1 = (LinearLayout) findViewById(R.id.l1);
+        l2 = (LinearLayout) findViewById(R.id.l2);
         db = new DBHelper(this);
     }
 
@@ -275,6 +271,8 @@ public class MainActivity extends AppCompatActivity {
             positionTv2.setTextSize(13);
 
             profileBtn.setPadding(0,0,0,0);
+            l1.setPadding(0,20,0,0);
+            l2.setPadding(0,20,0,0);
         }
         else{
             nameTv.setTextSize(32);
@@ -293,6 +291,8 @@ public class MainActivity extends AppCompatActivity {
             positionTv2.setTextSize(15);
 
             profileBtn.setPadding(0,30,0,0);
+            l1.setPadding(0,0,0,0);
+            l2.setPadding(0,0,0,0);
         }
 
     }

@@ -1,19 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#ffffff">
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/firstLayout"
-        android:gravity="center">
+        android:gravity="center"
+        android:id="@+id/firstLayout">
+
+        <TextView
+            android:id="@+id/firstContactsTv1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textSize="26sp"
+            android:text="비상 연락망이 없습니다." />
+        <TextView
+            android:id="@+id/firstContactsTv2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textSize="26sp"
+            android:text="아래 '+'버튼을 눌러 추가해주세요." />
 
         <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:src="@drawable/icon2"
+            android:layout_marginTop="20dp"
+            android:src="@drawable/add"
             android:background="#00000000"
             android:id="@+id/firstContactsBtn" />
     </LinearLayout>
@@ -27,15 +44,16 @@
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="20dp"
-            android:background="#3fc1d7">
+            android:layout_height="35dp"
+            android:background="#eeeeee">
 
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="#ffffff"
-                android:text="바로 연락 (즐겨찾기)" />
+                android:layout_height="35dp"
+                android:gravity="center_vertical"
+                android:layout_marginLeft="15dp"
+                android:textColor="#767676"
+                android:text="즐겨찾기" />
         </LinearLayout>
 
         <LinearLayout
@@ -43,7 +61,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <ListView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/favoriteContactListView" />
         </LinearLayout>
@@ -51,27 +69,18 @@
         <RelativeLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="5dp"
-            android:background="#3fc1d7">
+            android:layout_height="35dp"
+            android:background="#eeeeee">
 
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="35dp"
                 android:layout_centerVertical="true"
+                android:gravity="center_vertical"
                 android:layout_marginLeft="15dp"
-                android:textColor="#ffffff"
+                android:textColor="#767676"
                 android:text="연락처" />
 
-            <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginRight="10dp"
-                android:src="@drawable/check"
-                android:background="#00000000"
-                android:id="@+id/contactsBtn" />
         </RelativeLayout>
 
         <LinearLayout
@@ -79,7 +88,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <ListView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/contactsListView" />
         </LinearLayout>

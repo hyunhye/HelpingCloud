@@ -152,6 +152,7 @@
             android:layout_height="match_parent"
             android:gravity="center">
             <LinearLayout
+                android:id="@+id/l1"
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -159,7 +160,6 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="5dp"
                     android:orientation="vertical"
                     android:gravity="center"
                     android:layout_weight="1">
@@ -167,7 +167,6 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
                         android:layout_gravity="center"
                         android:src="@drawable/favorite"
                         android:background="#00000000" />
@@ -175,7 +174,6 @@
                         android:id="@+id/favoriteTv1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_margin="5dp"
                         android:layout_gravity="center"
                         android:textSize="26sp"
                         android:textStyle="bold"
@@ -190,18 +188,17 @@
                     <ImageButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
+                        android:layout_marginTop="5dp"
                         android:layout_marginBottom="5dp"
                         android:layout_gravity="center"
                         android:src="@drawable/favorite_button"
                         android:background="#00000000"
-                        android:id="@+id/favoriteContactBtn" />
+                        android:id="@+id/favoriteContactBtn"/>
 
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="5dp"
                     android:orientation="vertical"
                     android:gravity="center"
                     android:layout_weight="1">
@@ -209,7 +206,6 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
                         android:layout_gravity="center"
                         android:src="@drawable/contacts"
                         android:background="#00000000" />
@@ -217,7 +213,6 @@
                         android:id="@+id/contactsTv1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_margin="5dp"
                         android:layout_gravity="center"
                         android:textSize="26sp"
                         android:textStyle="bold"
@@ -232,7 +227,7 @@
                     <ImageButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
+                        android:layout_marginTop="5dp"
                         android:layout_marginBottom="5dp"
                         android:layout_gravity="center"
                         android:src="@drawable/contacts_button"
@@ -242,22 +237,20 @@
                 </LinearLayout>
             </LinearLayout>
             <LinearLayout
+                android:id="@+id/l2"
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_gravity="center">
+                android:layout_weight="1">
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
                     android:orientation="vertical"
                     android:gravity="center"
                     android:layout_weight="1">
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
                         android:layout_gravity="center"
                         android:src="@drawable/setting"
                         android:background="#00000000" />
@@ -265,7 +258,6 @@
                         android:id="@+id/settingTv1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_margin="5dp"
                         android:layout_gravity="center"
                         android:textSize="26sp"
                         android:textStyle="bold"
@@ -280,7 +272,7 @@
                     <ImageButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
+                        android:layout_marginTop="5dp"
                         android:layout_marginBottom="5dp"
                         android:layout_gravity="center"
                         android:src="@drawable/setting_button"
@@ -290,14 +282,12 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
                     android:orientation="vertical"
                     android:gravity="center"
                     android:layout_weight="1">
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
                         android:layout_gravity="center"
                         android:src="@drawable/position"
                         android:background="#00000000" />
@@ -305,7 +295,6 @@
                         android:id="@+id/positionTv1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_margin="5dp"
                         android:layout_gravity="center"
                         android:textSize="26sp"
                         android:textStyle="bold"
@@ -321,7 +310,7 @@
                     <ImageButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
+                        android:layout_marginTop="5dp"
                         android:layout_marginBottom="5dp"
                         android:layout_gravity="center"
                         android:src="@drawable/position_button"

@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Olders</string>
+    <string name="title_activity_postion">Map</string>
+    <string name="google_maps_key">AIzaSyCtgFJlT3L1ifiJz2bLPiniCsPWkW3WZfg</string>
 </resources>

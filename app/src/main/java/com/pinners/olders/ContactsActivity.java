@@ -1,32 +1,38 @@
 package com.pinners.olders;
 
-import android.app.ActionBar;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
+
 import java.util.List;
 
 /**
  * Created by Administrator on 2016-06-22.
  */
 public class ContactsActivity  extends AppCompatActivity {
-    private ImageButton contactsBtn, firstContactsBtn;
+    private ImageButton firstContactsBtn;
     private ListView favoriteContactListView;
     private ListView contactsListView;
     private ListViewAdapter adapter;
-    private ListViewAdapter favoriteAdapter;
+    private ListViewAdapter2 favoriteAdapter;
     private LinearLayout firstLayout;
     private LinearLayout secondLayout;
+    private TextView firstContactsTv1,firstContactsTv2;
+    private String fontSize = "small";
 
     public static DBHelper db;
     private  List<Contact> contacts;
@@ -41,8 +47,11 @@ public class ContactsActivity  extends AppCompatActivity {
 
         android.support.v7.app.ActionBar actionBar = getSupportActionBar();
         actionBar.setBackgroundDrawable(getResources().getDrawable(R.drawable.contacts_actionbar));
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setTitle("비상 연락망");
 
         init();
+        getPreferences();
 
         contacts = db.getAllContacts();
 
@@ -53,15 +62,6 @@ public class ContactsActivity  extends AppCompatActivity {
             firstLayout.setVisibility(View.GONE);
             secondLayout.setVisibility(View.VISIBLE);
         }
-
-        contactsBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Intent.ACTION_PICK);
-                intent.setData(ContactsContract.CommonDataKinds.Phone.CONTENT_URI);
-                startActivityForResult(intent, 0);
-            }
-        });
 
         firstContactsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -114,15 +114,30 @@ public class ContactsActivity  extends AppCompatActivity {
     }
 
     void init(){
-        contactsBtn = (ImageButton) findViewById(R.id.contactsBtn);
         firstContactsBtn = (ImageButton) findViewById(R.id.firstContactsBtn);
         favoriteContactListView = (ListView) findViewById(R.id.favoriteContactListView);
         contactsListView = (ListView) findViewById(R.id.contactsListView);
         db = new DBHelper(this);
         adapter = new ListViewAdapter();
-        favoriteAdapter = new ListViewAdapter();
+        favoriteAdapter = new ListViewAdapter2();
         firstLayout = (LinearLayout) findViewById(R.id.firstLayout);
         secondLayout = (LinearLayout) findViewById(R.id.secondLayout);
+        firstContactsTv1 = (TextView) findViewById(R.id.firstContactsTv1);
+        firstContactsTv2 = (TextView) findViewById(R.id.firstContactsTv2);
+    }
+
+    private void getPreferences(){
+        SharedPreferences pref = getSharedPreferences("pref", MODE_PRIVATE);
+        fontSize = pref.getString("fontSize","");
+        if(fontSize.equals("small")){
+            firstContactsTv1.setTextSize(13);
+            firstContactsTv2.setTextSize(13);
+        }
+        else{
+            firstContactsTv1.setTextSize(26);
+            firstContactsTv2.setTextSize(26);
+        }
+
     }
 
     @Override
@@ -151,5 +166,29 @@ public class ContactsActivity  extends AppCompatActivity {
         }catch(SecurityException e){
             Log.e("SecurityException", e.getMessage());
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu items for use in the action bar
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                return true;
+            case R.id.contacts_btn:
+                Intent intent = new Intent(Intent.ACTION_PICK);
+                intent.setData(ContactsContract.CommonDataKinds.Phone.CONTENT_URI);
+                startActivityForResult(intent, 0);
+                return true;
+
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

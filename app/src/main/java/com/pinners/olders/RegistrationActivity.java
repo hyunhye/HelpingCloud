@@ -2,11 +2,14 @@ package com.pinners.olders;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ToggleButton;
 
 /**
@@ -15,7 +18,7 @@ import android.widget.ToggleButton;
 public class RegistrationActivity extends AppCompatActivity {
     private EditText nameEditText;
     private EditText phoneNumberEditText;
-    private Button okBtn, deleteBtn;
+    private ImageButton okBtn, deleteBtn;
     private ToggleButton favoriteTb;
 
     private DBHelper db;
@@ -27,6 +30,12 @@ public class RegistrationActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
+
+        android.support.v7.app.ActionBar actionBar = getSupportActionBar();
+        actionBar.setBackgroundDrawable(getResources().getDrawable(R.drawable.contacts_actionbar));
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setTitle("비상 연락망");
+
         init();
 
         Intent intent = getIntent();
@@ -67,10 +76,21 @@ public class RegistrationActivity extends AppCompatActivity {
 
         nameEditText = (EditText) findViewById(R.id.nameEt);
         phoneNumberEditText = (EditText) findViewById(R.id.phoneNumberEt);
-        okBtn = (Button) findViewById(R.id.okBtn);
-        deleteBtn = (Button) findViewById(R.id.deleteBtn);
+        okBtn = (ImageButton) findViewById(R.id.okBtn);
+        deleteBtn = (ImageButton) findViewById(R.id.deleteBtn);
         favoriteTb = (ToggleButton) findViewById(R.id.favoriteTb);
         check = "false";
         db = ContactsActivity.getDB();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                return true;
+
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

@@ -24,7 +24,7 @@ import java.util.List;
 public class FavoriteContactsActivity extends AppCompatActivity {
     private ListView contactListView;
     ArrayList list;
-    ListViewAdapter adapter;
+    ListViewAdapter2 adapter;
     DBHelper db;
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +57,7 @@ public class FavoriteContactsActivity extends AppCompatActivity {
     private void init(){
         contactListView = (ListView) findViewById(R.id.contactListView);
         list = new ArrayList();
-        adapter = new ListViewAdapter();
+        adapter = new ListViewAdapter2();
         db = new DBHelper(this);
     }
 }
