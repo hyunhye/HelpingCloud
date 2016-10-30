@@ -1,4 +1,4 @@
-package com.pinners.olders;
+package com.pinners.olders.activity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -10,6 +10,8 @@ import android.view.MenuItem;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+
+import com.pinners.olders.R;
 
 /**
  * Created by Administrator on 2016-06-23.

@@ -1,25 +1,21 @@
-package com.pinners.olders;
+package com.pinners.olders.adapter;
 
 /**
  * Created by Administrator on 2016-06-22.
  */
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.drawable.Drawable;
-import android.net.Uri;
-import android.provider.MediaStore;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.io.IOException;
+import com.pinners.olders.R;
+import com.pinners.olders.dto.Contact;
+
 import java.util.ArrayList;
 
-public class ListViewAdapter extends BaseAdapter {
+public class ListViewAdapter2 extends BaseAdapter {
     private ArrayList<Contact> listViewItemList = new ArrayList<Contact>();
 
     @Override
@@ -34,11 +30,11 @@ public class ListViewAdapter extends BaseAdapter {
 
         if (convertView == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = inflater.inflate(R.layout.activity_list_item, parent, false);
+            convertView = inflater.inflate(R.layout.activity_list_item2, parent, false);
         }
 
-        TextView listItemNameTv = (TextView)convertView.findViewById(R.id.listItemNameTv);
-        TextView listItemPhoneNumberTv = (TextView)convertView.findViewById(R.id.listItemPhoneNumberTv);
+        TextView listItemNameTv = (TextView)convertView.findViewById(R.id.listItemNameTv2);
+        TextView listItemPhoneNumberTv = (TextView)convertView.findViewById(R.id.listItemPhoneNumberTv2);
 
         Contact listViewItem = listViewItemList.get(position);
 
@@ -69,5 +65,4 @@ public class ListViewAdapter extends BaseAdapter {
 
         listViewItemList.add(item);
     }
-
 }

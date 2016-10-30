@@ -1,8 +1,10 @@
-package com.pinners.olders;
+package com.pinners.olders.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.WindowManager;
+
+import com.pinners.olders.R;
 
 public class PositionActivity extends AppCompatActivity {
 

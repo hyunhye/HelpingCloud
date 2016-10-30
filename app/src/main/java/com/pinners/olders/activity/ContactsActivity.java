@@ -1,4 +1,4 @@
-package com.pinners.olders;
+package com.pinners.olders.activity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -17,6 +17,12 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.pinners.olders.dto.Contact;
+import com.pinners.olders.util.DBHelper;
+import com.pinners.olders.adapter.ListViewAdapter;
+import com.pinners.olders.adapter.ListViewAdapter2;
+import com.pinners.olders.R;
 
 import java.util.List;
 

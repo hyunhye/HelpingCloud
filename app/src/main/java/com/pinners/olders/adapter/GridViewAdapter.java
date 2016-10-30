@@ -1,4 +1,4 @@
-package com.pinners.olders;
+package com.pinners.olders.adapter;
 
 /**
  * Created by Administrator on 2016-06-22.
@@ -10,6 +10,9 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.pinners.olders.R;
+import com.pinners.olders.dto.Contact;
 
 import java.util.ArrayList;
 

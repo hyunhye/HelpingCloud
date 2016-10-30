@@ -1,4 +1,4 @@
-package com.pinners.olders;
+package com.pinners.olders.dto;
 
 /**
  * Created by Administrator on 2016-06-21.

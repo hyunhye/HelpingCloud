@@ -1,4 +1,4 @@
-package com.pinners.olders;
+package com.pinners.olders.activity;
 
 import android.app.ActionBar;
 import android.os.Bundle;
@@ -8,6 +8,8 @@ import android.view.KeyEvent;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
+
+import com.pinners.olders.R;
 
 /**
  * Created by Administrator on 2016-06-24.

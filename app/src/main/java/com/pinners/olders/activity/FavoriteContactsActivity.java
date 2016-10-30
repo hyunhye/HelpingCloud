@@ -1,4 +1,4 @@
-package com.pinners.olders;
+package com.pinners.olders.activity;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -9,7 +9,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
-import android.widget.ListView;
+
+import com.pinners.olders.dto.Contact;
+import com.pinners.olders.util.DBHelper;
+import com.pinners.olders.adapter.GridViewAdapter;
+import com.pinners.olders.R;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.pinners.olders;
+package com.pinners.olders.adapter;
 
 /**
  * Created by Administrator on 2016-06-22.
@@ -10,9 +10,12 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.pinners.olders.R;
+import com.pinners.olders.dto.Contact;
+
 import java.util.ArrayList;
 
-public class ListViewAdapter2 extends BaseAdapter {
+public class ListViewAdapter extends BaseAdapter {
     private ArrayList<Contact> listViewItemList = new ArrayList<Contact>();
 
     @Override
@@ -27,11 +30,11 @@ public class ListViewAdapter2 extends BaseAdapter {
 
         if (convertView == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = inflater.inflate(R.layout.activity_list_item2, parent, false);
+            convertView = inflater.inflate(R.layout.activity_list_item, parent, false);
         }
 
-        TextView listItemNameTv = (TextView)convertView.findViewById(R.id.listItemNameTv2);
-        TextView listItemPhoneNumberTv = (TextView)convertView.findViewById(R.id.listItemPhoneNumberTv2);
+        TextView listItemNameTv = (TextView)convertView.findViewById(R.id.listItemNameTv);
+        TextView listItemPhoneNumberTv = (TextView)convertView.findViewById(R.id.listItemPhoneNumberTv);
 
         Contact listViewItem = listViewItemList.get(position);
 
@@ -62,4 +65,5 @@ public class ListViewAdapter2 extends BaseAdapter {
 
         listViewItemList.add(item);
     }
+
 }

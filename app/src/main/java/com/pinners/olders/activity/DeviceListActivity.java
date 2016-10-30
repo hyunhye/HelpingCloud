@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.pinners.olders;
+package com.pinners.olders.activity;
 
         import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
@@ -43,7 +43,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
+        import com.pinners.olders.R;
+
+        import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

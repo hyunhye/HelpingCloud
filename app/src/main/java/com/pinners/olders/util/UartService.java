@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.pinners.olders;
+package com.pinners.olders.util;
 
 import android.app.Service;
 import android.bluetooth.BluetoothAdapter;

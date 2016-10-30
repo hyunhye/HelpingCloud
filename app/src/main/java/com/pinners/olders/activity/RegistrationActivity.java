@@ -1,16 +1,18 @@
-package com.pinners.olders;
+package com.pinners.olders.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ToggleButton;
+
+import com.pinners.olders.dto.Contact;
+import com.pinners.olders.util.DBHelper;
+import com.pinners.olders.R;
 
 /**
  * Created by Administrator on 2016-06-21.
