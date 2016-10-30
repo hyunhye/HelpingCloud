@@ -527,7 +527,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
         Log.i("ohdoking-gyro-result", gyro + " : " + total);
         // 9~11         : 가만히 있다.   (arduino : 10~11)
-        if (total > 9.7 && total < 11) {
+        if (total > 9.5d && total < 10.5d) {
             switch (flag) {
                 case 0:     // 넘어지지 않았고 가만히 계시네여    (정상)
                     return false;
@@ -559,7 +559,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             }
         }
         // 7~9 , 10~11  : 걷는다.
-        else if ((total > 7 && total < 9) || (total > 10.3 && total < 11)) {
+        else if ((total > 7 && total < 9) || (total > 10.3d && total < 11.5d)) {
             switch (flag) {
                 case 0:     // 넘어지지 않았고 걸어가시네여  (정상)
                     return false;
@@ -569,7 +569,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         }
 
         // 15 ~         : 넘어진다.
-        else if (total > 13) {
+        else if (total > 19d) {
             if (gyro) {
                 switch (flag) {
                     case 0:     // 넘어지 않은 상태였고 넘어지셨네여   (타이머 걸고, 5초뒤에 다시 체크)
