@@ -1,6 +1,6 @@
 # HelpingCloud
 
-갑작스런 쓰러짐, 사고를 당한 고령자를 위한 스마트 긴급 알림 서비스.
+## 갑작스런 쓰러짐, 사고를 당한 고령자를 위한 스마트 긴급 알림 서비스.
 
 1. OS:	Android
 2. 언어:	Arduino, Java, Android
