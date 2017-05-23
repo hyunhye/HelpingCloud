@@ -10,7 +10,7 @@
 
 
 ### 메인화면
-<img src="https://github.com/hyunhye/HelpingCloud/blob/master/ScreenShot/Main.png" width="100">
+<img src="https://github.com/hyunhye/HelpingCloud/blob/master/ScreenShot/Main.png" width="200">
 
 ### 비상연락망 화면
-<img src="https://github.com/hyunhye/HelpingCloud/blob/master/ScreenShot/%EB%B9%84%EC%83%81%EC%97%B0%EB%9D%BD%EB%A7%9D.png" width="100">
+<img src="https://github.com/hyunhye/HelpingCloud/blob/master/ScreenShot/%EB%B9%84%EC%83%81%EC%97%B0%EB%9D%BD%EB%A7%9D.png" width="200">
