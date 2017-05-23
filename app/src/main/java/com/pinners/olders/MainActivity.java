@@ -145,11 +145,11 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         android.support.v7.app.ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
 
-        TelephonyManager tMgr = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
-        mPhoneNumber = tMgr.getLine1Number();
-
         // Permission
         checkDangerousPermissions();
+
+        TelephonyManager tMgr = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
+        mPhoneNumber = tMgr.getLine1Number();
 
         // Init
         init();
