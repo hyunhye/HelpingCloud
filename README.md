@@ -8,4 +8,9 @@
 4. DB:	SQLite
 5. H/W:	타이니두이노 프로세서 /  타이니두이노 가속도센서 /  타이니두이노 블루투스 /  리튬 배터리
 
-![Alt text](F:/문서/1 자기소개서, 지원서, 포트폴리오/5 프로젝트/HelpingCloud/Main.png)
+
+### 메인화면
+! https://github.com/hyunhye/HelpingCloud/blob/master/ScreenCapture/Main.png
+
+### 비상연락망 화면
+! https://github.com/hyunhye/HelpingCloud/blob/master/ScreenCapture/%EB%B9%84%EC%83%81%EC%97%B0%EB%9D%BD%EB%A7%9D.png
